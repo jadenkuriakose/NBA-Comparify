@@ -1,0 +1,60 @@
+body{
+  background: rgb(65,65,65);
+  color:white;
+}
+
+.App {
+  text-align: center;
+  background: rgb(65,65,65);
+  color:white;
+  font-family:system-ui;
+}
+
+.input-section {
+  margin: 20px;
+}
+
+.input-section input {
+  margin: 5px;
+  padding: 8px;
+  font-family:system-ui;
+}
+
+.input-section button {
+  font-family:system-ui;
+  border-radius: 60px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  color:aliceblue;
+  font-weight: 700;
+  background: linear-gradient(cyan,rgb(0, 128, 255));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-section button:hover{
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(255,255,255,0.3);
+}
+
+.results-section {
+  margin-top: 20px;
+  font-family:system-ui;
+}
+
+.error {
+  color: red;
+}
+
+p{
+  font-weight: 600;
+}
+
+h1{
+  font-weight: 800;
+  color: cyan;
+}
+
+h2{
+  font-weight: 700;
+}
