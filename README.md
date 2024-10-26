@@ -4,5 +4,7 @@ Created an application that scrapes player career stats with Python and Beautifu
 Creates an API that is tested using POSTMAN and tested the API
 Connected to frontend with Flask, Flask CORS, Flask Executor, and Axios
 
-Set up accesses data quickly but may have inaccuracy with certain names --> Ex. Magic Johnson accesses the stats of Marques Johnson 
+Fixed Inaccuracies in data for common initial types by checking headers in recent commits
+
+Improved so can check current stats of active players or career stats of retired players in comparison
 
