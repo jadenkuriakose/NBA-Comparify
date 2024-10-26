@@ -10,12 +10,36 @@ executor = Executor(app)
 
 def construct_url(first_name, last_name):
     base = "https://www.basketball-reference.com"
-    initial = f"/players/{last_name[0].lower()}/{last_name.lower()[:5]}{first_name.lower()[:2]}01.html"
-    return base + initial
+    number = 1
+
+    while number <= 10:  
+        initial = f"/players/{last_name[0].lower()}/{last_name.lower()[:5]}{first_name.lower()[:2]}0{number}.html"
+        url = base + initial
+        
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+            player_header = soup.find('h1')  
+            
+            if player_header:
+                player_name = player_header.text.strip()
+                if player_name.lower() == f"{first_name} {last_name}".lower():
+                    return url
+        
+        except requests.RequestException as e:
+            print(f"An error occurred while fetching stats for {url}: {e}")
+        
+        number += 1 
+
+    print(f"No matching player found for {first_name} {last_name} after {number-1} attempts.")
+    return None  
+
+
 
 def extract_stats(url):
     try:
-        response = requests.get(url)  # Corrected from request.get to requests.get
+        response = requests.get(url)  
         response.raise_for_status()  
         soup = BeautifulSoup(response.text, 'html.parser')
         stats_pullout = soup.find('div', class_='stats_pullout')
@@ -34,7 +58,7 @@ def extract_stats(url):
                     p_tag = p_tag.find_next_sibling('p')
             return stats
         return {}
-    except requests.RequestException as e:  # Corrected from request.RequestException to requests.RequestException
+    except requests.RequestException as e:  
         print(f"An error occurred: {e}")
         return {}
 
@@ -52,12 +76,12 @@ def get_stats():
     if not all([first_name1, last_name1, first_name2, last_name2]):
         return jsonify({"error": "Please provide first and last names for both players"}), 400
 
-    # Use executor to fetch stats concurrently
+   
     future1 = executor.submit(fetch_player_stats, first_name1, last_name1)
     future2 = executor.submit(fetch_player_stats, first_name2, last_name2)
 
-    stats1 = future1.result()  # Wait for the result of the first player
-    stats2 = future2.result()  # Wait for the result of the second player
+    stats1 = future1.result() 
+    stats2 = future2.result()  
 
     if not stats1:
         return jsonify({"message": f"No statistics found for {first_name1} {last_name1}"}), 404
