@@ -10,30 +10,27 @@ executor = Executor(app)
 
 def construct_url(first_name, last_name):
     base = "https://www.basketball-reference.com"
-    number = 1
-
-    while number <= 10:  
+    
+    for number in range(1, 11):  
         initial = f"/players/{last_name[0].lower()}/{last_name.lower()[:5]}{first_name.lower()[:2]}0{number}.html"
         url = base + initial
         
         try:
             response = requests.get(url)
-            response.raise_for_status()
+            response.raise_for_status()  
             soup = BeautifulSoup(response.text, 'html.parser')
             player_header = soup.find('h1')  
             
             if player_header:
                 player_name = player_header.text.strip()
                 if player_name.lower() == f"{first_name} {last_name}".lower():
-                    return url
+                    return url  
         
         except requests.RequestException as e:
             print(f"An error occurred while fetching stats for {url}: {e}")
-        
-        number += 1 
-
-    print(f"No matching player found for {first_name} {last_name} after {number-1} attempts.")
-    return None  
+    
+    print(f"No matching player found for {first_name} {last_name} after 10 attempts.")
+    return None 
 
 
 
