@@ -8,3 +8,4 @@ Fixed Inaccuracies in data for common initial types by checking headers in recen
 
 Improved so the application can now check current stats of active players or career stats of retired players in comparison
 
+Requires full name to be used as is on the basketball reference website, cannot deviate from players real name on the roster
