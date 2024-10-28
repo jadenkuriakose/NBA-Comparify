@@ -19,6 +19,7 @@ body{
   padding: 8px;
   border-radius: 30px;
   font-family:system-ui;
+  border: none;
 }
 
 .input-section button {
@@ -29,8 +30,9 @@ body{
   cursor: pointer;
   color:aliceblue;
   font-weight: 700;
-  background: linear-gradient(cyan,rgb(65, 65, 65));
+  background: linear-gradient(rgb(0, 179, 255),rgb(0, 251, 255));
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
 }
 
 .input-section button:hover{
@@ -53,7 +55,7 @@ p{
 
 h1{
   font-weight: 800;
-  color: cyan;
+  color: white;
 }
 
 h2{
